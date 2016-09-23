@@ -63,7 +63,7 @@ app.get('/api/profile', function profile(req, res) {
   res.json({
     name: 'ryan',
     githubLink: 'https://github.com/rhamill1',
-    githubProfileImage: 'https://avatars1.githubusercontent.com/u/21372834?v=3&s=466'
+    githubProfileImage: 'https://avatars1.githubusercontent.com/u/21372834?v=3&s=466',
     personalSiteLink: 'cffmerchants.com',
     currentCity: 'Oakland',
     pets: []
