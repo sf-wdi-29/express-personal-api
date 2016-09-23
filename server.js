@@ -1,24 +1,41 @@
-// server.js
-// SERVER-SIDE JAVASCRIPT
-var db = require('./models');
-
-/////////////////////////////
-//  SETUP and CONFIGURATION
-/////////////////////////////
-
-//require express in our app
+// require express and other modules
 var express = require('express'),
-  bodyParser = require('body-parser');
+    app = express();
 
-// generate a new express app and call it 'app'
-var app = express();
-
-// serve static files in public
-app.use(express.static('public'));
-
-// body parser config to accept our datatypes
+// parse incoming urlencoded form data
+// and populate the req.body object
+var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// allow cross origin requests (optional)
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+/************
+ * DATABASE *
+ ************/
+
+// var db = require('./models');
+
+/**********
+ * ROUTES *
+ **********/
+
+// Serve static files from the `/public` directory:
+// i.e. `/images`, `/scripts`, `/styles`
+app.use(express.static('public'));
+
+/*
+ * HTML Endpoints
+ */
+
+app.get('/', function homepage(req, res) {
+  res.sendFile(__dirname + '/views/index.html');
+});
 
 
 /*
@@ -38,81 +55,13 @@ app.get('/api', function api_index(req, res) {
       {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
     ]
   })
-
-
-
-
-////////////////////
-//  ROUTES
-///////////////////
-
-
-
-
-// define a root route: localhost:3000/
-app.get('/', function (req, res) {
-  res.sendFile('views/index.html' , { root : __dirname});
 });
 
-// get all books
-app.get('/api/books', function (req, res) {
-  // send all books as JSON response
-  db.Book.find(function(err, books){
-    if (err) { return console.log("index error: " + err); }
-    res.json(books);
-  });
-});
+/**********
+ * SERVER *
+ **********/
 
-// get one book
-app.get('/api/books/:id', function (req, res) {
-  db.Books.findOne({_id: req.params._id }, function(err, data) {
-    res.json(data);
-  });
-});
-
-// create new book
-app.post('/api/books', function (req, res) {
-  // create new book with form data (`req.body`)
-  console.log('books create', req.body);
-  var newBook = req.body;
-  books.push(newBook);
-  res.json(newBook);
-});
-
-// update book
-app.put('/api/books/:id', function(req,res){
-// get book id from url params (`req.params`)
-  console.log('books update', req.params);
-  var bookId = req.params.id;
-  // find the index of the book we want to remove
-  var updateBookIndex = books.findIndex(function(element, index) {
-    return (element._id === parseInt(req.params.id)); //params are strings
-  });
-  console.log('updating book with index', deleteBookIndex);
-  var bookToUpdate = books[deleteBookIndex];
-  books.splice(updateBookIndex, 1, req.params);
-  res.json(req.params);
-});
-
-// delete book
-app.delete('/api/books/:id', function (req, res) {
-  // get book id from url params (`req.params`)
-  console.log('books delete', req.params);
-  var bookId = req.params.id;
-  // find the index of the book we want to remove
-  var deleteBookIndex = books.findIndex(function(element, index) {
-    return (element._id === parseInt(req.params.id)); //params are strings
-  });
-  console.log('deleting book with index', deleteBookIndex);
-  var bookToDelete = books[deleteBookIndex];
-  books.splice(deleteBookIndex, 1);
-  res.json(bookToDelete);
-});
-
-
-
-
-
+// listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Example app listening at http://localhost:3000/');
+  console.log('Express server is up and running on http://localhost:3000/');
 });
