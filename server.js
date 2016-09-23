@@ -63,7 +63,7 @@ app.get('/api/profile', function profile(req, res) {
   res.json({
     name: 'ryan',
     githubLink: 'https://github.com/rhamill1',
-    githubProfileImage: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=&url=https%3A%2F%2Fmdstories.com%2F2015%2F08%2F17%2Fmascot-monday-southern-maryland-blue-crabs%2F&psig=AFQjCNHrtzbIvaSBdwxNIPG0mxxbD5wamw&ust=1474756369832314'
+    // githubProfileImage: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=&url=https%3A%2F%2Fmdstories.com%2F2015%2F08%2F17%2Fmascot-monday-southern-maryland-blue-crabs%2F&psig=AFQjCNHrtzbIvaSBdwxNIPG0mxxbD5wamw&ust=1474756369832314'
     personalSiteLink: 'cffmerchants.com',
     currentCity: 'Oakland',
     pets: []
