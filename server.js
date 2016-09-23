@@ -48,11 +48,11 @@ app.get('/api', function api_index(req, res) {
     woopsIForgotToDocumentAllMyEndpoints: false,
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/rhamill1/express-personal-api",
-    baseUrl: "https://nameless-stream-72155.herokuapp.com",
+    baseUrl: "http://YOUR-APP-NAME.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "About the creator"},
-      {method: "POST", path: "/api/books", description: "E.g. Create a new book"}
+      {method: "POST", path: "/api/campsites", description: "E.g. Create a new book"}
     ]
   })
 });
