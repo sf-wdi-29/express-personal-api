@@ -23,7 +23,7 @@ https://nameless-stream-72155.herokuapp.com/
 
 - Test Environment
     - Can I get vanilla, hard coded html to render for model?
-    - Get books/campsite API to work. half hour
+    - Get books API to work.
 
 #Start up Instructions
 
