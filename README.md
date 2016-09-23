@@ -8,6 +8,8 @@ https://nameless-stream-72155.herokuapp.com/
 - write startup instructions in readme
 
 #Project Roadmap
+
+##Phase 1
 - Decide what model to do.
     weird animals
 
@@ -21,7 +23,7 @@ https://nameless-stream-72155.herokuapp.com/
 
 - Test Environment
     - Can I get vanilla, hard coded html to render for model?
-
+    - Get books/campsite API to work. half hour
 
 #Start up Instructions
 

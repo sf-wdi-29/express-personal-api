@@ -1,67 +1,131 @@
-// require express and other modules
+// server.js
+// SERVER-SIDE JAVASCRIPT
+var db = require('./models');
+
+/////////////////////////////
+//  SETUP and CONFIGURATION
+/////////////////////////////
+
+//require express in our app
 var express = require('express'),
-    app = express();
+  bodyParser = require('body-parser');
 
-// parse incoming urlencoded form data
-// and populate the req.body object
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+// generate a new express app and call it 'app'
+var app = express();
 
-// allow cross origin requests (optional)
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
-/************
- * DATABASE *
- ************/
-
-// var db = require('./models');
-
-/**********
- * ROUTES *
- **********/
-
-// Serve static files from the `/public` directory:
-// i.e. `/images`, `/scripts`, `/styles`
+// serve static files in public
 app.use(express.static('public'));
 
-/*
- * HTML Endpoints
- */
+// body parser config to accept our datatypes
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+
+
+////////////////////
+//  DATA
+///////////////////
+
+var books = [
+  {
+    _id: 15,
+    title: "The Four Hour Workweek",
+    author: "Tim Ferriss",
+    image: "https://s3-us-west-2.amazonaws.com/sandboxapi/four_hour_work_week.jpg",
+    release_date: "April 1, 2007"
+  },
+  {
+    _id: 16,
+    title: "Of Mice and Men",
+    author: "John Steinbeck",
+    image: "https://s3-us-west-2.amazonaws.com/sandboxapi/of_mice_and_men.jpg",
+    release_date: "Unknown 1937"
+  },
+  {
+    _id: 17,
+    title: "Romeo and Juliet",
+    author: "William Shakespeare",
+    image: "https://s3-us-west-2.amazonaws.com/sandboxapi/romeo_and_juliet.jpg",
+    release_date: "Unknown 1597"
+  }
+];
+
+
+
+
+
+
+
+////////////////////
+//  ROUTES
+///////////////////
+
+
+
+
+// define a root route: localhost:3000/
+app.get('/', function (req, res) {
+  res.sendFile('views/index.html' , { root : __dirname});
+});
+
+// get all books
+app.get('/api/books', function (req, res) {
+  // send all books as JSON response
+  db.Book.find(function(err, books){
+    if (err) { return console.log("index error: " + err); }
+    res.json(books);
+  });
+});
+
+// get one book
+app.get('/api/books/:id', function (req, res) {
+  db.Books.findOne({_id: req.params._id }, function(err, data) {
+    res.json(data);
+  });
+});
+
+// create new book
+app.post('/api/books', function (req, res) {
+  // create new book with form data (`req.body`)
+  console.log('books create', req.body);
+  var newBook = req.body;
+  books.push(newBook);
+  res.json(newBook);
+});
+
+// update book
+app.put('/api/books/:id', function(req,res){
+// get book id from url params (`req.params`)
+  console.log('books update', req.params);
+  var bookId = req.params.id;
+  // find the index of the book we want to remove
+  var updateBookIndex = books.findIndex(function(element, index) {
+    return (element._id === parseInt(req.params.id)); //params are strings
+  });
+  console.log('updating book with index', deleteBookIndex);
+  var bookToUpdate = books[deleteBookIndex];
+  books.splice(updateBookIndex, 1, req.params);
+  res.json(req.params);
+});
+
+// delete book
+app.delete('/api/books/:id', function (req, res) {
+  // get book id from url params (`req.params`)
+  console.log('books delete', req.params);
+  var bookId = req.params.id;
+  // find the index of the book we want to remove
+  var deleteBookIndex = books.findIndex(function(element, index) {
+    return (element._id === parseInt(req.params.id)); //params are strings
+  });
+  console.log('deleting book with index', deleteBookIndex);
+  var bookToDelete = books[deleteBookIndex];
+  books.splice(deleteBookIndex, 1);
+  res.json(bookToDelete);
 });
 
 
-/*
- * JSON API Endpoints
- */
 
-app.get('/api', function api_index(req, res) {
-  // TODO: Document all your api endpoints below
-  res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
-    endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
-    ]
-  })
-});
 
-/**********
- * SERVER *
- **********/
 
-// listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Express server is up and running on http://localhost:3000/');
+  console.log('Example app listening at http://localhost:3000/');
 });
