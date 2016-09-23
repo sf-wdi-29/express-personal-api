@@ -21,36 +21,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-////////////////////
-//  DATA
-///////////////////
+/*
+ * JSON API Endpoints
+ */
 
-var books = [
-  {
-    _id: 15,
-    title: "The Four Hour Workweek",
-    author: "Tim Ferriss",
-    image: "https://s3-us-west-2.amazonaws.com/sandboxapi/four_hour_work_week.jpg",
-    release_date: "April 1, 2007"
-  },
-  {
-    _id: 16,
-    title: "Of Mice and Men",
-    author: "John Steinbeck",
-    image: "https://s3-us-west-2.amazonaws.com/sandboxapi/of_mice_and_men.jpg",
-    release_date: "Unknown 1937"
-  },
-  {
-    _id: 17,
-    title: "Romeo and Juliet",
-    author: "William Shakespeare",
-    image: "https://s3-us-west-2.amazonaws.com/sandboxapi/romeo_and_juliet.jpg",
-    release_date: "Unknown 1597"
-  }
-];
-
-
-
+app.get('/api', function api_index(req, res) {
+  // TODO: Document all your api endpoints below
+  res.json({
+    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    message: "Welcome to my personal api! Here's what you need to know!",
+    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
+    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    endpoints: [
+      {method: "GET", path: "/api", description: "Describes all available endpoints"},
+      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
+      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+    ]
+  })
 
 
 
