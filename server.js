@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
  ************/
 
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -53,22 +53,22 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "About the creator"},
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new book"}
+      {method: "POST", path: "/api/books", description: "E.g. Create a new book"}
     ]
   })
 });
 
-app.get('/api/profile', function profile(req, res) {
-  // send profile as JSON response
-  res.json({
-    name: 'ryan',
-    githubLink: 'https://github.com/rhamill1',
-    githubProfileImage: 'https://avatars1.githubusercontent.com/u/21372834?v=3&s=466',
-    personalSiteLink: 'cffmerchants.com',
-    currentCity: 'Oakland',
-    pets: []
-  })
-});
+// app.get('/api/profile', function profile(req, res) {
+//   // send profile as JSON response
+//   res.json({
+//     name: 'ryan',
+//     githubLink: 'https://github.com/rhamill1',
+//     githubProfileImage: 'https://avatars1.githubusercontent.com/u/21372834?v=3&s=466',
+//     personalSiteLink: 'cffmerchants.com',
+//     currentCity: 'Oakland',
+//     pets: []
+//   })
+// });
 
 
 

@@ -5,7 +5,9 @@ https://nameless-stream-72155.herokuapp.com/
 #Technology and Strategy Goals
 - jquery
 - mongo/mongoose
+
 - write startup instructions in readme
+- responsive css
 
 #Project Roadmap
 
@@ -23,7 +25,10 @@ https://nameless-stream-72155.herokuapp.com/
 
 - Test Environment
     - Can I get vanilla, hard coded html to render for model?
-    - Get books API to work.
+    - Get profile API to work.
+    - Get books API to do something with seed data.
 
 #Start up Instructions
-
+- nodemon server.js
+- open new terminal window
+- mongod

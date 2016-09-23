@@ -1,4 +1,7 @@
 var mongoose = require("mongoose");
-mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/personal-api");
 
-module.exports.books = require("./book.js.");
+// process.env.MONGODB_URI
+module.exports.Book = require("./book.js");
+module.exports.Profile = require("./profile.js");
+
+mongoose.connect( "mongodb://localhost/personal-api");

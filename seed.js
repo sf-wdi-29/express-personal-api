@@ -54,6 +54,15 @@ var books_list = [
   }
 ];
 
+var myProfile = {
+    name: 'ryan',
+    githubLink: 'https://github.com/rhamill1',
+    githubProfileImage: 'https://avatars1.githubusercontent.com/u/21372834?v=3&s=466',
+    personalSiteLink: 'cffmerchants.com',
+    currentCity: 'Oakland',
+    pets: []
+}
+
 // remove all records that match {} -- which means remove ALL records
 db.Book.remove({}, function(err, books){
   if(err) {
@@ -65,6 +74,20 @@ db.Book.remove({}, function(err, books){
     db.Book.create(books_list, function(err, books){
       if (err) { return console.log('err', err); }
       console.log("created", books.length, "books");
+      process.exit();
+    });
+  }
+});
+
+db.Profile.remove({}, function(err, profile){
+  if(err) {
+    console.log('Error occurred in remove', err);
+  } else {
+    console.log('removed all books');
+
+    db.Profile.create(myProfile, function(err, profile){
+      if (err) { return console.log('err', err); }
+      console.log("created", profile.length, "profile");
       process.exit();
     });
   }
