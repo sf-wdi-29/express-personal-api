@@ -71,6 +71,14 @@ app.get('/api', function api_index(req, res) {
 // });
 
 
+app.get('/api/profile', function (req, res) {
+  // send my profile JSON response
+  db.Profile.find(function(err, profile){
+    if (err) { return console.log("index error: " + err); }
+    res.json(profile);
+  });
+});
+
 
 
 
