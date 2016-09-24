@@ -26,7 +26,10 @@ https://nameless-stream-72155.herokuapp.com/
 - Test Environment
     - Can I get vanilla, hard coded html to render for model?
     - Get profile API to work.
-    - Get books API to do something with seed data.
+
+##Phase 2
+    - update books to weird animals
+    - get seed data to render as JSON for Index API on local and heroku
 
 #Start up Instructions
 - nodemon server.js

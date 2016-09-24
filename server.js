@@ -58,18 +58,6 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
-// app.get('/api/profile', function profile(req, res) {
-//   // send profile as JSON response
-//   res.json({
-//     name: 'ryan',
-//     githubLink: 'https://github.com/rhamill1',
-//     githubProfileImage: 'https://avatars1.githubusercontent.com/u/21372834?v=3&s=466',
-//     personalSiteLink: 'cffmerchants.com',
-//     currentCity: 'Oakland',
-//     pets: []
-//   })
-// });
-
 
 app.get('/api/profile', function (req, res) {
   // send my profile JSON response
@@ -79,6 +67,13 @@ app.get('/api/profile', function (req, res) {
   });
 });
 
+app.get('/api/weirdAnimals', function (req, res) {
+  // send weirdAnimals JSON response
+  db.weirdAnimals.find(function(err, weirdAnimals){
+    if (err) { return console.log("index error: " + err); }
+    res.json(weirdAnimals);
+  });
+});
 
 
 
