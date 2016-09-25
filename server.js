@@ -53,7 +53,7 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "About the creator"},
-      {method: "POST", path: "/api/books", description: "E.g. Create a new book"}
+      {method: "POST", path: "/api/weirdAnimals", description: "E.g. Create a new animal"}
     ]
   })
 });
@@ -75,6 +75,12 @@ app.get('/api/weirdAnimals', function (req, res) {
   });
 });
 
+app.post('/api/weirdAnimals', function(req, res) {
+  var item = new db.weirdAnimals(req.body);
+  item.save(function(err, newItem) {
+    res.json(newItem);
+  });
+});
 
 
 /**********
