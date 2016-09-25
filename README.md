@@ -24,14 +24,26 @@ https://nameless-stream-72155.herokuapp.com/
     image on iphone
 
 - Test Environment
-    - Can I get vanilla, hard coded html to render for model?
-    - Get profile API to work.
+- Can I get vanilla, hard coded html to render for model?
+- Get profile API to work.
 
 ##Phase 2
-    - update books to weird animals
-    - get seed data to render as JSON for Index API on local and heroku
+- update books to weird animals
+- get seed data to render as JSON for Index API on local and heroku
 
-#Start up Instructions
+##Phase 3, Update html/css
+- background color and font
+- center content
+- add form
+- add submit fields and buttons
+
+#Local Start Up Instructions
 - nodemon server.js
 - open new terminal window
 - mongod
+- node seed.js
+
+#Heroku Start Up Instructions
+- heroku
+- heroku run bash
+- node seed.js
