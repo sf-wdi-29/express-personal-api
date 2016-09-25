@@ -9,44 +9,45 @@ $(document).ready(function(){
   var allweirdanimals = [];
 
   // element to display list of weirdanimals
-  var $weirdanimalsList = $('#weirdanimals-list');
+  // var $weirdanimalsList = $('#weirdanimals-list');
+  var $weirdanimalsList = $('#weirdAnimal');
 
   // form to create new todo
   var $createweirdanimal = $('#newAnimalForm');
 
   // compile handlebars template
-  // var source = $('#weirdanimals-template').html();
-  // var template = Handlebars.compile(source);
+  var $weirdAnimal = $('weirdAnimal');
+  var source = $('#weirdAnimal-tmpl').html();
+  var template = Handlebars.compile(source);
 
-  // // helper function to render all weirdanimals to view
-  // // note: we empty and re-render the collection each time our weirdanimal data changes
-  // function render() {
-  //   // empty existing weirdanimals from view
-  //   $weirdanimalsList.empty();
+  // helper function to render all weirdanimals to view
+  // note: we empty and re-render the collection each time our weirdanimal data changes
+  function render() {
+    // empty existing weirdanimals from view
+    $weirdanimalsList.empty();
 
-  //   // pass `allweirdanimals` into the template function
-  //   var weirdanimalsHtml = template({ weirdanimals: allweirdanimals });
+    // pass `allweirdanimals` into the template function
+    // console.log(weirdAnimal);
+    // console.log(allweirdanimals);
+    console.log(template);
+    var weirdanimalsHtml = template({weirdAnimal: allweirdanimals});
+    // console.log(weirdanimalsHtml);
+    // append html to the view
+    $weirdanimalsList.append(weirdanimalsHtml);
+    // console.log($weirdanimalsList);
+  };
 
-  //   // append html to the view
-  //   $weirdanimalsList.append(weirdanimalsHtml);
-  // };
+  // GET all weirdanimals on page load
+  $.ajax({
+    method: "GET",
+    url: baseUrl,
+    success: function onIndexSuccess(json) {
+      allweirdanimals = json;
+      render();
+    }
+  });
 
-  // // GET all weirdanimals on page load
-  // $.ajax({
-  //   method: "GET",
-  //   url: baseUrl,
-  //   success: function onIndexSuccess(json) {
-  //     console.log(json);
-
-  //     // set `allweirdanimals` to weirdanimal data (json.data) from API
-  //     allweirdanimals = json.weirdanimals;
-
-  //     // render all weirdanimals to view
-  //     render();
-  //   }
-  // });
-
-  // listen for submit even on form
+  // listen for submit event on form
   $createweirdanimal.on('submit', function (event) {
     event.preventDefault();
 

@@ -40,6 +40,20 @@ https://nameless-stream-72155.herokuapp.com/
 ##Phase 4
 - get create method to work
 
+##Phase 5
+- get all records to display on index.html
+    - update app.js
+    - update index.html
+
+##Phase 6
+- get delete buttons to display next to records
+
+##Phase 7
+- get delete buttons to destory records
+
+##Phase 8
+- add update functionality
+
 #Local Start Up Instructions
 - nodemon server.js
 - open new terminal window

@@ -47,6 +47,26 @@
         </div>
         <button type="submit" class="btn btn-default">Create Animal</button>
       </form>
+
+      <div class="container">
+        <h2>Weird Animals</h2>
+          <div class="row" id="weirdAnimal">
+            <script id="weirdAnimal-tmpl" type="text/x-handlebars-template">
+              {{#each weirdAnimal}}
+              <div class="col-md-3 weirdAnimal-items">
+                <p><img src="{{image}}"></p>
+                <p>{{name}}</p>
+                <p>{{location}}</p>
+                <p>{{discoveredBy}}</p>
+                <p>{{discoveryDate}}</p>
+                <button type="button" class="btn btn-default deleteBtn" data-id={{_id}}>Delete</button>
+              </div>
+              {{/each}}
+            </script>
+          </div>
+        <hr>
+      </div>
+
       <h4><a href="/api">Read My API Documentation</a>
       <a href="/api/profile">About the creator</a></h4>
     </div>
