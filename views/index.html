@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>Weird Animals!</title>
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -19,14 +19,35 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Weird Animals</h1>
-          <h2>Cute, Friendly, Unexpected, Dangerous, Mysterious</h2>
-          <h4><a href="/api">Read My API Documentation</a>
-          <a href="/api/profile">About the creator</a></h4>
+      <h1>Weird Animals</h1>
+      <h3>Cute, Friendly, Unexpected, Dangerous, Mysterious</h3>
+      <h2>Fantastic!</h2>
+      <form class="form-inline" id="newAnimalForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" placeholder="animal name">
         </div>
-      </div>
+        <div class="form-group">
+          <label for="name">Image</label>
+          <input type="text" class="form-control" name="image" placeholder="image url">
+        </div>
+
+        <div class="form-group">
+          <label for="name">Location</label>
+          <input type="text" class="form-control" name="location" placeholder="ocean">
+        </div>
+        <div class="form-group">
+          <label for="name">discoveredBy</label>
+          <input type="text" class="form-control" name="discoveredBy" placeholder="me!">
+        </div>
+        <div class="form-group">
+          <label for="name">discoveryDate</label>
+          <input type="text" class="form-control" name="discoveryDate" placeholder="today!">
+        </div>
+        <button type="submit" class="btn btn-default">Create Animal</button>
+      </form>
+      <h4><a href="/api">Read My API Documentation</a>
+      <a href="/api/profile">About the creator</a></h4>
     </div>
   </body>
 </html>

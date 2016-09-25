@@ -32,8 +32,8 @@ https://nameless-stream-72155.herokuapp.com/
 - get seed data to render as JSON for Index API on local and heroku
 
 ##Phase 3, Update html/css
-- background color and font
 - center content
+- background color
 - add form
 - add submit fields and buttons
 
