@@ -37,6 +37,9 @@ https://nameless-stream-72155.herokuapp.com/
 - add form
 - add submit fields and buttons
 
+##Phase 4
+- get create method to work
+
 #Local Start Up Instructions
 - nodemon server.js
 - open new terminal window
