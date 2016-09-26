@@ -75,13 +75,18 @@ app.get('/api/weirdAnimals', function (req, res) {
   });
 });
 
-app.post('/api/weirdAnimals', function(req, res) {
+app.post('/api/weirdAnimals', function (req, res) {
   var item = new db.weirdAnimals(req.body);
   item.save(function(err, newItem) {
     res.json(newItem);
   });
 });
 
+app.delete('/api/weirdAnimals/:id', function (req, res) {
+  db.weirdAnimals.findOneAndRemove({_id: req.params.id}, function(err, item) {
+    res.json(item);
+  });
+});
 
 /**********
  * SERVER *

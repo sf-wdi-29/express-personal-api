@@ -9,7 +9,6 @@ $(document).ready(function(){
   var allweirdanimals = [];
 
   // element to display list of weirdanimals
-  // var $weirdanimalsList = $('#weirdanimals-list');
   var $weirdanimalsList = $('#weirdAnimal');
 
   // form to create new todo
@@ -23,18 +22,9 @@ $(document).ready(function(){
   // helper function to render all weirdanimals to view
   // note: we empty and re-render the collection each time our weirdanimal data changes
   function render() {
-    // empty existing weirdanimals from view
     $weirdanimalsList.empty();
-
-    // pass `allweirdanimals` into the template function
-    // console.log(weirdAnimal);
-    // console.log(allweirdanimals);
-    console.log(template);
     var weirdanimalsHtml = template({weirdAnimal: allweirdanimals});
-    // console.log(weirdanimalsHtml);
-    // append html to the view
     $weirdanimalsList.append(weirdanimalsHtml);
-    // console.log($weirdanimalsList);
   };
 
   // GET all weirdanimals on page load
@@ -61,18 +51,38 @@ $(document).ready(function(){
       data: newweirdanimal,
       success: function onCreateSuccess(json) {
         console.log(json);
-
-        // add new weirdanimal to `allweirdanimals`
         allweirdanimals.push(json);
-
-        // render all weirdanimals to view
-        // render();
+        render();
       }
     });
-console.log('after request');
+
     // reset the form
     $createweirdanimal[0].reset();
     $createweirdanimal.find('input').first().focus();
+  });
+
+
+  $weirdanimalsList.on('click', '.deleteBtn', function() {
+    console.log('the delete button was hit');
+    $.ajax({
+      method: 'DELETE',
+      url: '/api/weirdanimals/' + $(this).attr('dataId'),
+      success: function (json) {
+        // console.log(item.url);
+        console.log('entered success function');
+
+        var item = json;
+        var itemId = item._id;
+        var i;
+        for (i = 0; i < allweirdanimals.length; i++) {
+          if (allweirdanimals[i]._id === itemId) {
+            allweirdanimals.splice(i, 1);
+            break;
+          }
+        }
+        render();
+      }
+    });
   });
 
 });
