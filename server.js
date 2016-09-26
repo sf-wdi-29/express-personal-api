@@ -1,6 +1,6 @@
 // require express and other modules
 var express = require('express'),
-    app = express();
+  app = express();
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -15,11 +15,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 /************
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
+
 
 /**********
  * ROUTES *
@@ -32,7 +34,6 @@ app.use(express.static('public'));
 /*
  * HTML Endpoints
  */
-
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
@@ -43,25 +44,87 @@ app.get('/', function homepage(req, res) {
  */
 
 app.get('/api', function api_index(req, res) {
-  // TODO: Document all your api endpoints below
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false,
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    documentationUrl: "https://github.com/rhamill1/express-personal-api/blob/master/README.md",
+    baseUrl: "https://nameless-stream-72155.herokuapp.com/",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "About the creator"},
+      {method: "POST", path: "/api/weirdAnimals", description: "E.g. Create a new animal"}
+      {method: "DELETE", path: "/api/weirdAnimals", description: "Delete an animal"},
+      {method: "PUT", path: "/api/weirdAnimals", description: "Update an animal"}
     ]
   })
 });
+
+
+app.get('/api/profile', function (req, res) {
+  db.Profile.find(function(err, profile){
+    if (err) { return console.log("index error: " + err); }
+    res.json(profile);
+  });
+});
+
+
+app.get('/api/weirdAnimals', function (req, res) {
+  db.weirdAnimals.find(function(err, weirdAnimals){
+    if (err) { return console.log("index error: " + err); }
+    res.json(weirdAnimals);
+  });
+});
+
+
+// return specific record. couldn't get to work
+// app.get('/api/weirdAnimals/:id', function (req, res) {
+//   db.weirdAnimals.find(function(err, weirdAnimal){
+//     if (err) { return console.log("index error: " + err); }
+//     res.json(profile);
+//   });
+// });
+
+// app.get('/api/weirdAnimals/:id', function show(req, res) {
+//   var animalId = parseInt(req.params.id);
+//   var foundAnimal = weirdAnimals.filter(function (todo) {
+//     return weirdAnimals._id == animalId;
+//   })[0];
+//   res.json(foundAnimal);
+// });
+
+app.post('/api/weirdAnimals', function (req, res) {
+  var item = new db.weirdAnimals(req.body);
+  item.save(function(err, newItem) {
+    res.json(newItem);
+  });
+});
+
+
+app.delete('/api/weirdAnimals/:id', function (req, res) {
+  db.weirdAnimals.findOneAndRemove({_id: req.params.id}, function(err, item) {
+    res.json(item);
+  });
+});
+
+
+app.put('/api/weirdAnimals/:id', function(req, res) {
+  db.weirdAnimals.findOne({_id: req.params.id}, function(err, animal) {
+    animal.image = req.body.image;
+    animal.name = req.body.name;
+    animal.location = req.body.location;
+    animal.discoveredBy = req.body.discoveredBy;
+    animal.discoveryDate = req.body.discoveryDate;
+    animal.save(function(err, newAnimal) {
+      res.json(newAnimal);
+    });
+  });
+});
+
 
 /**********
  * SERVER *
  **********/
 
-// listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is up and running on http://localhost:3000/');
 });
