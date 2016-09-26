@@ -15,12 +15,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 /************
  * DATABASE *
  ************/
 
-
 var db = require('./models');
+
 
 /**********
  * ROUTES *
@@ -33,7 +34,6 @@ app.use(express.static('public'));
 /*
  * HTML Endpoints
  */
-
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
@@ -44,7 +44,6 @@ app.get('/', function homepage(req, res) {
  */
 
 app.get('/api', function api_index(req, res) {
-  // TODO: Document all your api endpoints below
   res.json({
     woopsIForgotToDocumentAllMyEndpoints: false,
     message: "Welcome to my personal api! Here's what you need to know!",
@@ -60,7 +59,6 @@ app.get('/api', function api_index(req, res) {
 
 
 app.get('/api/profile', function (req, res) {
-  // send my profile JSON response
   db.Profile.find(function(err, profile){
     if (err) { return console.log("index error: " + err); }
     res.json(profile);
@@ -68,7 +66,6 @@ app.get('/api/profile', function (req, res) {
 });
 
 app.get('/api/weirdAnimals', function (req, res) {
-  // send weirdAnimals JSON response
   db.weirdAnimals.find(function(err, weirdAnimals){
     if (err) { return console.log("index error: " + err); }
     res.json(weirdAnimals);
@@ -88,11 +85,24 @@ app.delete('/api/weirdAnimals/:id', function (req, res) {
   });
 });
 
+app.put('/api/weirdAnimals/:id', function(req, res) {
+  db.weirdAnimals.findOne({_id: req.params.id}, function(err, animal) {
+    animal.image = req.body.image;
+    animal.name = req.body.name;
+    animal.location = req.body.location;
+    animal.discoveredBy = req.body.discoveredBy;
+    animal.discoveryDate = req.body.discoveryDate;
+    animal.save(function(err, newAnimal) {
+      res.json(newAnimal);
+    });
+  });
+});
+
+
 /**********
  * SERVER *
  **********/
 
-// listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
   console.log('Express server is up and running on http://localhost:3000/');
 });
