@@ -1,6 +1,6 @@
 // require express and other modules
 var express = require('express'),
-    app = express();
+  app = express();
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -53,6 +53,8 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "About the creator"},
       {method: "POST", path: "/api/weirdAnimals", description: "E.g. Create a new animal"}
+      {method: "DELETE", path: "/api/weirdAnimals", description: "Delete an animal"},
+      {method: "PUT", path: "/api/weirdAnimals", description: "Update an animal"}
     ]
   })
 });
@@ -65,12 +67,30 @@ app.get('/api/profile', function (req, res) {
   });
 });
 
+
 app.get('/api/weirdAnimals', function (req, res) {
   db.weirdAnimals.find(function(err, weirdAnimals){
     if (err) { return console.log("index error: " + err); }
     res.json(weirdAnimals);
   });
 });
+
+
+// return specific record. couldn't get to work
+// app.get('/api/weirdAnimals/:id', function (req, res) {
+//   db.weirdAnimals.find(function(err, weirdAnimal){
+//     if (err) { return console.log("index error: " + err); }
+//     res.json(profile);
+//   });
+// });
+
+// app.get('/api/weirdAnimals/:id', function show(req, res) {
+//   var animalId = parseInt(req.params.id);
+//   var foundAnimal = weirdAnimals.filter(function (todo) {
+//     return weirdAnimals._id == animalId;
+//   })[0];
+//   res.json(foundAnimal);
+// });
 
 app.post('/api/weirdAnimals', function (req, res) {
   var item = new db.weirdAnimals(req.body);
@@ -79,11 +99,13 @@ app.post('/api/weirdAnimals', function (req, res) {
   });
 });
 
+
 app.delete('/api/weirdAnimals/:id', function (req, res) {
   db.weirdAnimals.findOneAndRemove({_id: req.params.id}, function(err, item) {
     res.json(item);
   });
 });
+
 
 app.put('/api/weirdAnimals/:id', function(req, res) {
   db.weirdAnimals.findOne({_id: req.params.id}, function(err, animal) {

@@ -52,15 +52,22 @@ https://nameless-stream-72155.herokuapp.com/
 - get delete buttons to destory records
 
 ##Phase 8
+- update documentation
+- clean up code style
+
+##Phase 9
+- add index get
+
+##Phase 10
 - add update functionality
 
-#Local Start Up Instructions
+#Local Start Up Dev Instructions
 - nodemon server.js
 - open new terminal window
 - mongod
 - node seed.js
 
-#Heroku Start Up Instructions
+#Heroku Start Up Prod Instructions
 - heroku
 - heroku run bash
 - node seed.js

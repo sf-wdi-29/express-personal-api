@@ -27,6 +27,7 @@ $(document).ready(function(){
     $weirdanimalsList.append(weirdanimalsHtml);
   };
 
+
   // GET all weirdanimals on page load
   $.ajax({
     method: "GET",
@@ -37,25 +38,22 @@ $(document).ready(function(){
     }
   });
 
+
   // listen for submit event on form
   $createweirdanimal.on('submit', function (event) {
     event.preventDefault();
-
     // serialze form data
     var newweirdanimal = $(this).serialize();
-
     // POST request to create new weirdanimal
     $.ajax({
       method: "POST",
       url: baseUrl,
       data: newweirdanimal,
       success: function onCreateSuccess(json) {
-        console.log(json);
         allweirdanimals.push(json);
         render();
       }
     });
-
     // reset the form
     $createweirdanimal[0].reset();
     $createweirdanimal.find('input').first().focus();
@@ -63,14 +61,10 @@ $(document).ready(function(){
 
 
   $weirdanimalsList.on('click', '.deleteBtn', function() {
-    console.log('the delete button was hit');
     $.ajax({
       method: 'DELETE',
       url: '/api/weirdanimals/' + $(this).attr('dataId'),
       success: function (json) {
-        // console.log(item.url);
-        console.log('entered success function');
-
         var item = json;
         var itemId = item._id;
         var i;
@@ -84,5 +78,4 @@ $(document).ready(function(){
       }
     });
   });
-
 });
