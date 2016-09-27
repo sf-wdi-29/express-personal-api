@@ -112,11 +112,11 @@ app.delete('/api/vinyls/:id', function destroy(req, res) {
 });
 
 // update vinyl
-app.put('/api/vinyls/:id', function update(req, res) {
-  var id = req.params.id;
-  db.Vinyl.findById(req.params.id)
-
-}
+// app.put('/api/vinyls/:id', function update(req, res) {
+//   var id = req.params.id;
+//   db.Vinyl.findById(req.params.id)
+//
+// }
 
 
 /**********
