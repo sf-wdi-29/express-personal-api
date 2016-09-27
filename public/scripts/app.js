@@ -1,20 +1,21 @@
 console.log("Sanity Check: JS is working!");
-var template;
-var $vinylsList;
-var allVinyls = [];
 
 $(document).ready(function(){
 
-  $vinylsList = $('#vinylTarget');
+  // base API route
+  var baseUrl = '/api/vinyls';
 
-  var source = $('#vinyl-template').html();
-  template = handlebars.compile(source);
+  // array to hold vinyl data from API
+  var allVinyls = [];
 
-  $.ajax({
-    method: 'GET',
-    url: '/api/vinyls',
-    success: handleSuccess,
-    error: handleError
-  });
+  // element to display list of vinyls
+  var $vinylsList = $('#vinyls-list');
+
+  // form to create new vinyl
+  var $createVinyl = $('#create-vinyl');
+
+  // compile handlebars template
+  var source = $('#vinyls-template').html();
+  var template = handlebars.compile(source);
 
 });
