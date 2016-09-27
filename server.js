@@ -57,6 +57,20 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
+// VINYL CODE
+// get all vinyl
+app.get('/api/vinyl', function(req,res) {
+  db.
+})
+
+// get one vinyl
+
+// create new vinyl
+
+// delete one vinyl
+
+
+
 /**********
  * SERVER *
  **********/
