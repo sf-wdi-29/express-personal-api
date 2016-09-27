@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>Personal API</title>
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -12,19 +12,102 @@
 
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
+
+    <title>Personal API</title>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
+
+    <!-- header -->
+    <div class="well">
+      <div class="container">
+        <div class="page-header">
+          <img src="https://avatars2.githubusercontent.com/u/14087582?v=3&s=466" />
+          <h1>Natalia Hess API</h1>
         </div>
       </div>
     </div>
+
+    <!-- page content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <!-- new vinyl form-->
+          <form class="form-inline" id="create-vinyl">
+            <h3>Add a new vinyl to the collection:</h3>
+            <div class="form-group">
+              <input type="text" name="title" class="form-control" placeholder="Example: Jagged Little Pill" autofocus>
+            </div>
+            <div class="form-group">
+              <input type="text" name="artist" class="form-control" placeholder="Example: Alanis Morissette">
+            </div>
+            <div class="form-group">
+              <input type="text" name="releaseDate" class="form-control" placeholder="Example: June 13, 1995">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="Add New Vinyl">
+            </div>
+          </form>
+          <br>
+
+          <!-- list of vinyls -->
+          <ul class="list-group" id="vinyls-list">
+
+            <!-- handlebars template -->
+            <script id="vinyls-template" type="text/x-handlebars-template">
+              {{#each vinyls}}
+                <li class="list-group-item vinyl" data-id="{{_id}}">
+
+                  <!-- vinyl label (title) -->
+                  <span class="label label-default">{{title}}</span>
+
+                  <!-- vinyl artist -->
+                  {{artist}}
+
+                  <!-- vinyl release date -->
+                  {{releaseDate}}
+
+                  <div class="pull-right">
+                    <!-- pencil icon to toggle update form -->
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+
+                    <!-- trash can icon to delete vinyl -->
+                     <a href="javascript:void(0)" class="delete-vinyl">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </div>
+
+                  <!-- form to update vinyl -->
+                  <div class="collapse" id="update-{{_id}}">
+                    <br>
+                    <form class="form-inline update-vinyl">
+                      <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="Title" value="{{title}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="artist" class="form-control" placeholder="Artist" value="{{artist}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="releaseDate" class="form-control" placeholder="Release Date" value="{{releaseDate}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-block btn-default" value="Update">
+                      </div>
+                    </form>
+                  </div>
+                </li>
+              {{/each}}
+            </script>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -1,10 +1,28 @@
-body {
-  color: #333;
-  font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
-}
+/*body {
+  background-image: url('https://i.imgur.com/iil8azu.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}*/
 
 h1 {
-  margin-top: 100px;
-  text-align: center;
+  margin-left: 30px;
+  display: inline-block;
+  margin-top: 40px;
+}
+.pull-right a {
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  margin: 3px 5px 0 0;
+  opacity: 0.2;
+}
+.pull-right a:hover {
+  color: #000;
+  opacity: 0.5;
+}
+
+img {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
 }
