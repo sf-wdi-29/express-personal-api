@@ -37,5 +37,28 @@ $(document).ready(function(){
       render();
     }
   });
+
+  // listen for submit on form
+  $createVinyl.on('submit', function(event) {
+    event.preventDefault();
+
+    // serialize form data
+    var newVinyl = $(this).serialize();
+
+    // POST request to create new vinyl
+    $.ajax({
+      method: "POST",
+      url: baseUrl,
+      data: newVinyl,
+      success: function onCreateSuccess(json) {
+        console.log(json);
+        allVinyls.push(json);
+        render();
+      }
+    });
+    // reset the form
+    $createVinyl[0].reset();
+    $createVinyl.find('input').first().focus();
+  });
   
 });
