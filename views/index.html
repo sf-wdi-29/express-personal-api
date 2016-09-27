@@ -19,41 +19,86 @@
 
   </head>
   <body>
+
+    <!-- header -->
+    <div class="well">
+      <div class="container">
+        <div class="page-header">
+          <h1>Natalia Hess API</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- page content -->
     <div class="container">
-      <h1 class="text-center">Personal API</h1>
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <form class="form-inline" id="newVinylForm">
+        <div class="col-md-12">
+
+          <!-- new vinyl form-->
+          <form class="form-inline" id="create-vinyl">
             <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" name="title" placeholder="Example: Jagged Little Pill">
+              <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
             </div>
             <div class="form-group">
-              <label for="title">Artist</label>
-              <input type="text" class="form-control" name="artist" placeholder="Example: Alanis Morissette">
+              <input type="text" name="artist" class="form-control" placeholder="Artist">
             </div>
             <div class="form-group">
-              <label for="releaseDate">Release Date</label>
-              <input type="text" class="form-control" name="releaseDate" placeholder="Example: June 13, 1995">
+              <input type="text" name="releaseDate" class="form-control" placeholder="Release Date">
             </div>
-            <button type="submit" class="btn btn-default">Add new vinyl</button>
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="Add New Vinyl">
+            </div>
           </form>
-          <h4><a href="/api">Read My API Documentation</a></h4>
-          <div id='bookTarget'>
+          <br>
+
+          <!-- list of vinyls -->
+          <ul class="list-group" id="vinyls-list">
+
             <!-- handlebars template -->
-            <script id="vinyl-template" type="text/x-handlebars-template">
-              {{#each vinyl}}
-              <hr>
-              <p>
-                <b>{{title}}</b>
-                by {{artist}}
-                {{releaseDate}}
-                <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button>
-              </p>
+            <script id="vinyls-template" type="text/x-handlebars-template">
+              {{#each vinyls}}
+                <li class="list-group-item vinyl" data-id="{{_id}}">
+
+                  <!-- vinyl label (title) -->
+                  <span class="label label-default">{{title}}</span>
+
+                  <!-- vinyl artist -->
+                  {{artist}}
+
+                  <div class="pull-right">
+                    <!-- pencil icon to toggle update form -->
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+
+                    <!-- trash can icon to delete vinyl -->
+                     <a href="javascript:void(0)" class="delete-vinyl">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </div>
+
+                  <!-- form to update vinyl -->
+                  <div class="collapse" id="update-{{_id}}">
+                    <br>
+                    <form class="form-inline update-vinyl">
+                      <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="Title" value="{{title}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="artist" class="form-control" placeholder="Artist" value="{{artist}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="releaseDate" class="form-control" placeholder="Release Date" value="{{releaseDate}}">
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-block btn-default" value="Update">
+                      </div>
+                    </form>
+                  </div>
+                </li>
               {{/each}}
             </script>
-          </div>
+          </ul>
         </div>
       </div>
     </div>
