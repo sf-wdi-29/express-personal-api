@@ -16,7 +16,7 @@ $(document).ready(function(){
 
   // compile handlebars template
   var source = $('#vinyls-template').html();
-  var template = handlebars.compile(source);
+  var template = Handlebars.compile(source);
 
   // function to render all vinyls to views
   function render() {

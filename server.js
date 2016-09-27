@@ -83,7 +83,7 @@ app.get('/api/vinyls', function index(req, res) {
 });
 
 // get one vinyl
-app.get('/api/vinyls/:id', function(req, res) {
+app.get('/api/vinyls/:id', function show(req, res) {
   db.Vinyl.findById(req.params.id, function(err, vinyl) {
     if (err) { return console.log("show error: " + err); }
     res.json(vinyl);
@@ -91,7 +91,7 @@ app.get('/api/vinyls/:id', function(req, res) {
 });
 
 // create new vinyl
-app.post('/api/vinyls', function(req, res) {
+app.post('/api/vinyls', function create(req, res) {
   var newVinyl = new db.Vinyl({
     title: req.body.title,
     artist: req.body.artist,
@@ -102,7 +102,7 @@ app.post('/api/vinyls', function(req, res) {
 
 
 // delete one vinyl
-app.delete('/api/vinyls/:id', function(req, res) {
+app.delete('/api/vinyls/:id', function destroy(req, res) {
   console.log(req.params);
   var vinylId = req.params.id;
 
@@ -112,9 +112,11 @@ app.delete('/api/vinyls/:id', function(req, res) {
 });
 
 // update vinyl
-// app.put('/api/vinyls/:id', function(req, res) {
-//
-// }
+app.put('/api/vinyls/:id', function update(req, res) {
+  var id = req.params.id;
+  db.Vinyl.findById(req.params.id)
+
+}
 
 
 /**********

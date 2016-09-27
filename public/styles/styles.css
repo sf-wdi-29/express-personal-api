@@ -1,4 +1,6 @@
 h1 {
+  margin-left: 30px;
+  display: inline-block;
   margin-top: 40px;
 }
 .pull-right a {
@@ -15,4 +17,10 @@ h1 {
 
 .search-form {
   position: absolute;
+}
+
+img {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
 }
