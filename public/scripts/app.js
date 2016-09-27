@@ -91,6 +91,26 @@ $(document).ready(function(){
       });
     })
 
-    
-  // end
+    // for delete
+    .on('click', '.delete-vinyl', function(event) {
+      event.preventDefault();
+
+      // find the vinyl by id stored in HTML as 'data-id'
+      var vinylId = $(this).closest('.vinyl').attr('data-id');
+
+      // find the vinyl to delete by id
+      var vinylToDelete = allVinyls.find(function(vinyl) {
+        return vinyl._id == vinylId;
+      });
+
+      // DELETE request to delete vinyl
+      $.ajax({
+        type: 'DELETE',
+        url: baseUrl + '/' + vinylId,
+        success: function onDeleteSuccess(json) {
+          allVinyls.splice(allVinyls.indexOf(vinylToDelete), 1);
+          render();
+        }
+      });
+    });
 });
