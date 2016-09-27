@@ -1,3 +1,9 @@
+/*body {
+  background-image: url('https://i.imgur.com/iil8azu.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}*/
+
 h1 {
   margin-left: 30px;
   display: inline-block;
@@ -13,10 +19,6 @@ h1 {
 .pull-right a:hover {
   color: #000;
   opacity: 0.5;
-}
-
-.search-form {
-  position: absolute;
 }
 
 img {
