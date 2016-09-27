@@ -60,5 +60,37 @@ $(document).ready(function(){
     $createVinyl[0].reset();
     $createVinyl.find('input').first().focus();
   });
-  
+
+  // add event handlers to vinyls for updating/deleting
+  $vinylsList
+
+    // for update
+    .on('submit', '.update-vinyl', function(event) {
+      event.preventDefault();
+
+      // find the vinyl by id stored in HTML as 'data-id'
+      var vinylId = $(this).closest('.vinyl').attr('data-id');
+
+      // find the vinyl to update by id
+      var vinylToUpdate = allVinyls.find(function(vinyl) {
+        return vinyl._id == vinylId;
+      });
+
+      // serialize form data
+      var updatedVinyl = $(this).serialize();
+
+      // PUT request to update vinyl
+      $.ajax({
+        type: 'PUT',
+        url: baseUrl + '/' + vinylId,
+        data: updatedVinyl,
+        success: function onUpdateSuccess(json) {
+          allVinyls.splice(allVinyls.indexOf(vinylToUpdate), 1, json);
+          render();
+        }
+      });
+    })
+
+    
+  // end
 });
