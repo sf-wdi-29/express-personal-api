@@ -3,7 +3,7 @@
 
 var db = require('./models');
 
-var vinyl_list = [
+var vinyls = [
   {
     title: "Jagged Little Pill",
     artist: "Alanis Morissette",
@@ -78,5 +78,21 @@ var vinyl_list = [
     title: "Deja Entendu",
     artist: "Brand New",
     releaseDate: "June 17, 2003"
-  },
+  }
 ];
+
+// remove all records that match {} -- which means remove ALL records
+db.Vinyl.remove({}, function(err, vinyls){
+  if(err) {
+    console.log('Error occurred in remove', err);
+  } else {
+    console.log('removed all vinyls');
+
+    // create new records based on the array vinyl_list
+    db.Vinyl.create(vinyl, function(err, vinyls){
+      if (err) { return console.log('err', err); }
+      console.log("created", vinyl.length, "vinyl");
+      process.exit();
+    });
+  }
+});

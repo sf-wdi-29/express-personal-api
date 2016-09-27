@@ -52,11 +52,11 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"},
-      {method: "GET", path: "/api/vinyl", description: "Shows vinyl collection"},
-      {method: "GET", path: "/api/vinyl/:id", description: "Shows vinyl by id"},
-      {method: "POST", path: "/api/vinyl", description: "Creates a new vinyl"},
-      {method: "DELETE", path: "/api/vinyl/:id", description: "Deletes a vinyl"},
-      {method: "PUT", path: "/api/vinyl/:id", description: "Updates a vinyl"}
+      {method: "GET", path: "/api/vinyls", description: "Shows vinyl collection"},
+      {method: "GET", path: "/api/vinyls/:id", description: "Shows vinyl by id"},
+      {method: "POST", path: "/api/vinyls", description: "Creates a new vinyl"},
+      {method: "DELETE", path: "/api/vinyls/:id", description: "Deletes a vinyl"},
+      {method: "PUT", path: "/api/vinyls/:id", description: "Updates a vinyl"}
     ]
   })
 });
@@ -74,21 +74,47 @@ app.get('/api/profile', function(req, res) {
 
 // VINYL CODE //
 // get all vinyl
-app.get('/api/vinyl', function(req,res) {
-  db.Vinyl.find(function(err, vinyl_list) {
-    if (err) {
-      return console.log("index error: " + err);
-    }
-    res.json(vinyl_list);
+app.get('/api/vinyls', function(req, res) {
+  // send all vinyl as JSON response
+  db.Vinyl.find(function(err, vinyls){
+    if (err) { return console.log("index error: " + err); }
+    res.json(vinyls);
   });
 });
 
 // get one vinyl
+app.get('/api/vinyls/:id', function(req, res) {
+  db.Vinyl.findById(req.params.id, function(err, vinyl) {
+    if (err) { return console.log("show error: " + err); }
+    res.json(vinyl);
+  });
+});
 
 // create new vinyl
+app.post('/api/vinyls', function(req, res) {
+  var newVinyl = new db.Vinyl({
+    title: req.body.title,
+    artist: req.body.artist,
+    releaseDate: req.body.releaseDate,
+  });
+  newVinyl.save();
+});
+
 
 // delete one vinyl
+app.delete('/api/vinyls/:id', function(req, res) {
+  console.log(req.params);
+  var vinylId = req.params.id;
 
+  db.Vinyl.findOneAndRemove({ _id: vinylId }, function (err, deletedVinyl) {
+    res.json(deletedVinyl);
+  });
+});
+
+// update vinyl
+// app.put('/api/vinyls/:id', function(req, res) {
+//
+// }
 
 
 /**********
