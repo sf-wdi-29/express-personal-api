@@ -81,18 +81,9 @@ var vinyls = [
   }
 ];
 
-// remove all records that match {} -- which means remove ALL records
-db.Vinyl.remove({}, function(err, vinyls){
-  if(err) {
-    console.log('Error occurred in remove', err);
-  } else {
-    console.log('removed all vinyls');
-
-    // create new records based on the array vinyl_list
-    db.Vinyl.create(vinyl, function(err, vinyls){
-      if (err) { return console.log('err', err); }
-      console.log("created", vinyl.length, "vinyl");
-      process.exit();
-    });
-  }
+// create new records based on the array vinyls
+db.Vinyl.create(vinyls, function(err, vinyls){
+  if (err) { return console.log('err', err); }
+  console.log("created", vinyls.length, "vinyls");
+  process.exit();
 });

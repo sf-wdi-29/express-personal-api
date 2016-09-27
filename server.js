@@ -74,7 +74,7 @@ app.get('/api/profile', function(req, res) {
 
 // VINYL CODE //
 // get all vinyl
-app.get('/api/vinyls', function(req, res) {
+app.get('/api/vinyls', function index(req, res) {
   // send all vinyl as JSON response
   db.Vinyl.find(function(err, vinyls){
     if (err) { return console.log("index error: " + err); }
