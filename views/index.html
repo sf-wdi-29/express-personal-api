@@ -27,23 +27,28 @@
           <form class="form-inline" id="newVinylForm">
             <div class="form-group">
               <label for="title">Title</label>
-              <input type="text" class="form-control" name="title" placeholder="Vinyl title">
+              <input type="text" class="form-control" name="title" placeholder="Example: Jagged Little Pill">
             </div>
             <div class="form-group">
               <label for="title">Artist</label>
-              <input type="text" class="form-control" name="artist" placeholder="Vinyl artist">
+              <input type="text" class="form-control" name="artist" placeholder="Example: Alanis Morissette">
             </div>
-            <button type="submit" class="btn btn-default">Create vinyl</button>
+            <div class="form-group">
+              <label for="releaseDate">Release Date</label>
+              <input type="text" class="form-control" name="releaseDate" placeholder="Example: June 13, 1995">
+            </div>
+            <button type="submit" class="btn btn-default">Add new vinyl</button>
           </form>
           <h4><a href="/api">Read My API Documentation</a></h4>
           <div id='bookTarget'>
             <!-- handlebars template -->
-            <script id="books-template" type="text/x-handlebars-template">
-              {{#each books}}
+            <script id="vinyl-template" type="text/x-handlebars-template">
+              {{#each vinyl}}
               <hr>
               <p>
                 <b>{{title}}</b>
                 by {{artist}}
+                {{releaseDate}}
                 <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button>
               </p>
               {{/each}}

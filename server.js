@@ -45,10 +45,10 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false,
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    baseUrl: "http://murmuring-cliffs-89829.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
@@ -57,14 +57,25 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
-// VINYL CODE
+app.get('/api/profile', profile(req, res) {
+  res.json({
+    name: "Natalia Hess",
+    githubLink: "https://github.com/nathess91",
+    githubProfileImage: "https://avatars2.githubusercontent.com/u/14087582?v=3&s=466",
+    personalSiteLink: "https://www.linkedin.com/in/nataliahess",
+    currentCity: "Oakland, CA",
+    pets: [{name: "Fabio", type: "Dog", breed: "Coton de Tulear"}]
+  })
+});
+
+// VINYL CODE //
 // get all vinyl
 app.get('/api/vinyl', function(req,res) {
-  db.Vinyl.find(function(err, vinyl) {
+  db.Vinyl.find(function(err, vinyl_list) {
     if (err) {
       return console.log("index error: " + err);
     }
-    res.json(vinyl);
+    res.json(vinyl_list);
   })
 });
 
