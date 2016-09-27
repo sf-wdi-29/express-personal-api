@@ -27,4 +27,15 @@ $(document).ready(function(){
     $vinylsList.append(vinylsHtml);
   };
 
+  // GET all vinyls on page load
+  $.ajax({
+    method: "GET",
+    url: baseUrl,
+    success: function onIndexSuccess(json) {
+      console.log(json);
+      allVinyls = json.vinyls;
+      render();
+    }
+  });
+  
 });
