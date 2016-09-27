@@ -51,13 +51,17 @@ app.get('/api', function api_index(req, res) {
     baseUrl: "http://murmuring-cliffs-89829.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Data about me"},
+      {method: "GET", path: "/api/vinyl", description: "Shows vinyl collection"},
+      {method: "GET", path: "/api/vinyl/:id", description: "Shows vinyl by id"},
+      {method: "POST", path: "/api/vinyl", description: "Creates a new vinyl"},
+      {method: "DELETE", path: "/api/vinyl/:id", description: "Deletes a vinyl"},
+      {method: "PUT", path: "/api/vinyl/:id", description: "Updates a vinyl"}
     ]
   })
 });
 
-app.get('/api/profile', profile(req, res) {
+app.get('/api/profile', function(req, res) {
   res.json({
     name: "Natalia Hess",
     githubLink: "https://github.com/nathess91",
@@ -76,7 +80,7 @@ app.get('/api/vinyl', function(req,res) {
       return console.log("index error: " + err);
     }
     res.json(vinyl_list);
-  })
+  });
 });
 
 // get one vinyl

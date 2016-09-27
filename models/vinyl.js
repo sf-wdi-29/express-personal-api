@@ -11,6 +11,8 @@ var VinylSchema = new Schema({
   releaseDate: String
 });
 
+// create Vinyl model from Schema
 var Vinyl = mongoose.model('Vinyl', VinylSchema);
 
+// export Vinyl model
 module.exports = Vinyl;
