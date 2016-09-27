@@ -18,4 +18,13 @@ $(document).ready(function(){
   var source = $('#vinyls-template').html();
   var template = handlebars.compile(source);
 
+  // function to render all vinyls to views
+  function render() {
+    $vinylsList.empty();
+
+    var vinylsHtml = template({ vinyls: allVinyls });
+
+    $vinylsList.append(vinylsHtml);
+  };
+
 });
