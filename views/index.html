@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>Personal API</title>
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -16,12 +16,25 @@
 
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
+
   </head>
   <body>
     <div class="container">
+      <h1 class="text-center">Personal API</h1>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <h1>Under Construction</h1>
+          <form class="form-inline" id="newVinylForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" name="title" placeholder="Vinyl title">
+            </div>
+            <div class="form-group">
+              <label for="title">Artist</label>
+              <input type="text" class="form-control" name="artist" placeholder="Vinyl artist">
+            </div>
+            <button type="submit" class="btn btn-default">Create vinyl</button>
+          </form>
           <h4><a href="/api">Read My API Documentation</a></h4>
         </div>
       </div>

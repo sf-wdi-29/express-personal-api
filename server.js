@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -60,8 +60,13 @@ app.get('/api', function api_index(req, res) {
 // VINYL CODE
 // get all vinyl
 app.get('/api/vinyl', function(req,res) {
-  db.
-})
+  db.Vinyl.find(function(err, vinyl) {
+    if (err) {
+      return console.log("index error: " + err);
+    }
+    res.json(vinyl);
+  })
+});
 
 // get one vinyl
 
